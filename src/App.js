@@ -55,5 +55,40 @@ function App() {
   );
 }
 
+const fetchUserTopTracks = async (token) => {
+  const res = await fetch("https://api.spotify.com/v1/me/top/tracks?limit=10", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await res.json();
+  console.log("Top Tracks: ", data.items);
+  return data.items;
+};
+
+const fetchAudioFeatures = async (token, trackIds) => {
+  const idsParam = trackIds.join(',');
+  const res = await fetch(`https://api.spotify.com/v1/audio-features?ids=${idsParam}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await res.json();
+  console.log("Audio Features: ", data.audio_features);
+  return data.audio_features;
+};
+
+const onLogin = async (_token) => {
+  setToken(_token);
+  localStorage.setItem("spotifyAccessToken", _token);
+
+  const topTracks = await fetchUserTopTracks(_token);
+  const trackIds = topTracks.map(track => track.id);
+  const features = await fetchAudioFeatures(_token, trackIds);
+
+  // Optional: Save them in state too
+};
+
+
 export default App;
 
