@@ -24,6 +24,18 @@
   color: white;
 }
 
+.login-button {
+  font-size: 18px;
+  padding: 12px 24px;
+  background: linear-gradient(45deg, #ff4ecd, #6c63ff);
+  border: none;
+  border-radius: 30px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
 .App-link {
   color: #61dafb;
 }
